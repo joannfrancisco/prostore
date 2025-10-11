@@ -3,10 +3,13 @@ import { PrismaNeon } from "@prisma/adapter-neon";
 import { PrismaClient } from "@prisma/client";
 import ws from "ws";
 
+// Enable WebSocket connections for Neon
 neonConfig.webSocketConstructor = ws;
 
-const connectionString = `${process.env.DATABASE_URL}`;
+// Use your connection string directly
+const connectionString = process.env.DATABASE_URL!;
 
+// ✅ Correct: pass an object with the connection string
 const adapter = new PrismaNeon({ connectionString });
 
 export const prisma = new PrismaClient({ adapter }).$extends({
